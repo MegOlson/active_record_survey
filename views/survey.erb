@@ -20,5 +20,23 @@
   <p>There are no questions in the survey.</p>
 <% end %>
 
+<form class="" action="/surveys/<%= @survey.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="survey_name">Survey Name</label>
+    <input type="text" name="survey_name" class="form-control">
+  </div>
+  <br><button type="submit" name="button" class="btn">Update Survey Name</button>
+</form>
+
+<br>
+
+
+<form class="" action="/surveys/<%= @survey.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <div class="form-group">
+    <button type="submit" name="button" class="btn">Delete</button>
+  </div>
+</form>
 
 <a href="/">Home</a>

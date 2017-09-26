@@ -34,3 +34,15 @@ post('/question') do
   @questions = @survey.questions
   erb(:survey)
 end
+
+delete('/surveys/:id/delete') do
+  @survey = Survey.find(params[:id])
+  @survey.delete
+  redirect "/"
+end
+
+patch('/surveys/:id/edit') do
+  @survey = Survey.find(params[:id])
+  @survey.update({title: params["survey_name"]})
+  redirect "/surveys/#{@survey.id}"
+end
