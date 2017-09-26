@@ -13,9 +13,12 @@
 <% if @questions.any? %>
   <ol>
   <% @questions.each do |question| %>
-    <li>  <%= question.question %> </li>
+    <li> <a href="/questions/<%=question.id %>"><%= question.question %></a></li>
   <% end %>
   </ol>
 <% else %>
   <p>There are no questions in the survey.</p>
 <% end %>
+
+
+<a href="/">Home</a>
