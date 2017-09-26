@@ -52,19 +52,14 @@ get('/questions/:id') do
   erb(:question)
 end
 
-
 delete('/questions/:id/delete') do
   @question = Question.find(params[:id])
-  # binding.pry
-  # @survey = Survey.find(params[:id])
   @question.delete
   redirect "/surveys/#{@question.survey_id}"
 end
 
-
-
-  patch('/questions/:id/edit') do
-    @question = Question.find(params[:id])
-    @question.update({question: params["question"]})
-    redirect"/questions/#{@question.id}"
-  end
+patch('/questions/:id/edit') do
+  @question = Question.find(params[:id])
+  @question.update({question: params["question"]})
+  redirect"/questions/#{@question.id}"
+end

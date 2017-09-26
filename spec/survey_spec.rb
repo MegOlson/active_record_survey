@@ -1,7 +1,5 @@
 require('spec_helper')
 
-
-
 describe(Survey) do
   describe("#questions") do
     it("tells which questions are in it") do
@@ -10,5 +8,9 @@ describe(Survey) do
       test_question2 = Question.create({:question => "question2", :survey_id => test_survey.id})
      expect(test_survey.questions()).to(eq([test_question1, test_question2]))
     end
+  end
+  it('validates presence of survey title') do
+    survey = Survey.new({:title => ""})
+    expect(survey.save()).to(eq(false))
   end
 end

@@ -1,5 +1,6 @@
 class Survey < ActiveRecord::Base
   has_many(:questions)
+  validates(:title, :presence => true)
   before_save(:capitalize_first_letter)
 
 
