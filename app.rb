@@ -20,3 +20,18 @@ post('/survey') do
   survey.save
   erb(:index)
 end
+
+get('/surveys/:id') do
+  @questions = Question.all
+  @survey = Survey.find(params[:id])
+  erb(:survey)
+end
+
+post('/question') do
+  @survey = Survey.find(params['survey_id'])
+  question_name = params['question']
+  question = Question.new({question: question_name})
+  question.save
+  @questions = Question.all
+  erb(:survey)
+end
