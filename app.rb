@@ -4,6 +4,7 @@ require("sinatra/activerecord")
 also_reload("lib/**/*.rb")
 require("./lib/survey")
 require("./lib/question")
+require("./lib/choice")
 require("pg")
 require("pry")
 
@@ -18,7 +19,7 @@ post('/survey') do
   survey_title = params["survey_title"]
   @survey = Survey.new({title: survey_title})
   if @survey.save()
-    erb(:index)
+    redirect "/surveys/".concat(@survey.id().to_s())
   else
     erb(:errors)
   end
@@ -50,10 +51,24 @@ patch('/surveys/:id/edit') do
   redirect "/surveys/#{@survey.id}"
 end
 
+
+
 get('/questions/:id') do
+
   @question = Question.find(params[:id])
   erb(:question)
 end
+
+post('/choice') do
+  @question = Question.find(params['question_id'].to_i)
+  choice_name = params['choice']
+
+  @question.choices.create({choice: choice_name})
+  @choices = @question.choices
+  erb(:question)
+end
+
+
 
 delete('/questions/:id/delete') do
   @question = Question.find(params[:id])

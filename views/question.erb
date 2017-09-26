@@ -1,5 +1,31 @@
 <h1> <%= @question.question %> </h1>
 
+<form class="" action="/choice" method="post">
+  <!-- <input type="hidden" name="_method" value="patch"> -->
+  <input type="hidden" name="question_id" value="<%= @question.id %>">
+  <div class="form-group">
+    <label for="choice">Choice</label>
+    <input type="text" name="choice" class="form-control">
+  </div>
+  <br><button type="submit" name="button" class="btn">Add Choice</button>
+</form>
+
+<br>
+<br>
+
+<% if @question.choices.any? %>
+  <ol>
+  <% @question.choices.each do |choice| %>
+    <li><%= choice.choice %></a></li>
+  <% end %>
+  </ol>
+<% else %>
+  <p>There are no choices in the survey.</p>
+<% end %>
+
+<br>
+<br>
+<br>
 
 <form class="" action="/questions/<%= @question.id %>/edit" method="post">
   <input type="hidden" name="_method" value="patch">
@@ -11,7 +37,6 @@
 </form>
 
 <br>
-
 
 <form class="" action="/questions/<%= @question.id %>/delete" method="post">
   <input type="hidden" name="_method" value="delete">

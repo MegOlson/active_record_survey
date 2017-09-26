@@ -5,6 +5,7 @@ require 'rspec'
 require 'pg'
 require 'survey'
 require 'question'
+require 'choice'
 
 
 RSpec.configure do |config|
@@ -14,6 +15,9 @@ RSpec.configure do |config|
     end
     Question.all.each do |question|
       question.destroy()
+    end
+    Choice.all().each() do |choice|
+      choice.destroy()
     end
   end
 end
