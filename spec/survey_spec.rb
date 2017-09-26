@@ -13,4 +13,8 @@ describe(Survey) do
     survey = Survey.new({:title => ""})
     expect(survey.save()).to(eq(false))
   end
+  it('ensures the length of description is at mosst 50 characters') do
+    survey = Survey.new({:title => "a".*(51)})
+    expect(survey.save()).to(eq(false))
+  end
 end
