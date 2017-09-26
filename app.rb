@@ -16,9 +16,12 @@ end
 post('/survey') do
   @surveys = Survey.all
   survey_title = params["survey_title"]
-  survey = Survey.new({title: survey_title})
-  survey.save
-  erb(:index)
+  @survey = Survey.new({title: survey_title})
+  if @survey.save()
+    erb(:index)
+  else
+    erb(:errors)
+  end
 end
 
 get('/surveys/:id') do
